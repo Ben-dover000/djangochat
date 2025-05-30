@@ -48,6 +48,7 @@ idna==3.10
 
 # Useful utilities
 attrs==24.2.0
+typing_extensions
 packaging==24.0
 msgpack==1.0.5
 backports.zoneinfo==0.2.1
