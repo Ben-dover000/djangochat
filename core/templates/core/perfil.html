@@ -1,0 +1,83 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Perfil | {% endblock %}
+
+{% block content %}
+<div class="caixa-perfil paper">
+    <h1 class="fita">Perfil</h1>
+
+    <label class="label"><strong>Nome:</strong> {{ user.username }}</label>
+
+    <label class="label">
+        <strong>Palavra-Passe (Não partilhar!):</strong> 
+        <a href="{% url 'password_change' %}">
+            <button type="button">Alterar Palavra-Passe</button>
+        </a>
+    </label>
+
+    <form method="post" enctype="multipart/form-data" style="margin-top: 2rem;">
+        {% csrf_token %}
+        {{ perfil_form.as_p }}
+        <button type="submit">Guardar Alterações</button>
+    </form>
+
+    <hr>
+
+
+    <div class="favorite-albuns-box caixa-perfil">
+        <h3 class="fita" style="text-align: center; border-color:transparent;">Albuns favoritos</h3>
+        <div class="artist-slider-wrapper">
+            <button class="arrow left" onclick="scrollSlider(-1)">&#10094;</button>
+            <div class="artist-slider" id="artist-slider">
+                {% for album in favoritos_albuns %}
+                    <div class="artist-item">
+                        <a href="{% url 'album_detail' id_album=album.id_album %}">
+                            {{ album.nome }}
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+            <button class="arrow right" onclick="scrollSlider(1)">&#10095;</button>
+        </div>
+    </div>
+
+    <div class="favorite-artists-box caixa-perfil">
+        <h3 class="fita" style="text-align: center; border-color:transparent;">Artistas favoritos</h3>
+        <div class="artist-slider-wrapper">
+            <button class="arrow left" onclick="scrollSlider(-1)">&#10094;</button>
+            <div class="artist-slider" id="artist-slider">
+                {% for artista in favoritos_artistas %}
+                    <div class="artist-item">
+                        <a href="{% url 'artista_detail' id_artista=artista.id_artista %}">
+                            {{ artista.nome }}
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+            <button class="arrow right" onclick="scrollSlider(1)">&#10095;</button>
+        </div>
+    </div>
+
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+</div>
+
+<script>
+let currentIndex = 0;
+function scrollSlider(direction) {
+    const slider = document.getElementById('artist-slider');
+    const itemWidth = 180;
+    const visibleItems = 4;
+    const totalItems = slider.children.length;
+    const maxIndex = totalItems - visibleItems;
+
+    currentIndex += direction;
+    currentIndex = Math.max(0, Math.min(currentIndex, maxIndex));
+
+    const scrollAmount = currentIndex * itemWidth;
+    slider.style.transform = `translateX(-${scrollAmount}px)`;
+}
+</script>
+{% endblock %}
