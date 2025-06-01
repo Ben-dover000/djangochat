@@ -6,3 +6,4 @@ dj-database-url>=2.2.0
 Pillow>=9.5.0
 gunicorn
 whitenoise
+daphne
