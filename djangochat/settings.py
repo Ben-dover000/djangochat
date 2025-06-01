@@ -6,6 +6,9 @@ import os
 from pathlib import Path
 import dj_database_url
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 # Cloudinary configuration
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'dg8zlfzw3',
@@ -20,8 +23,6 @@ CLOUDINARY_STORAGE = {
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-secret-key-for-dev')
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
@@ -88,8 +89,7 @@ CHANNEL_LAYERS = {
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3'),
-    )
+        default='sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')),
 }
 
 AUTH_PASSWORD_VALIDATORS = [
