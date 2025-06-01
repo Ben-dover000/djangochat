@@ -1,0 +1,31 @@
+
+{% extends 'core/base.html' %}
+
+{% block title %}{{ artista.nome }} | Artista{% endblock %}
+
+{% block content %}
+<div class="caixa-perfil paper">
+    <div class="album-container label">
+        <img class="img" src="{{ artista.imagem.url }}" alt="{{ artista.nome }}" />
+        <div class="detalhes_artista">
+            <h1 class="fita">{{ artista.nome }}</h1>
+            <h2 class="nome_artista label">{{ artista.nome }}</h2>
+        </div>
+        <form method="post" action="{% url 'toggle_artista_favorito' artista.id_artista %}">
+            {% csrf_token %}
+            <button type="submit" class="favorite-button" style="background: none; border: none;">
+                {% if user in artista.favorito.all %}
+                    <i class="bi bi-star-fill" style="color: gold;"></i>
+                {% else %}
+                    <i class="bi bi-star"></i>
+                {% endif %}
+            </button>
+        </form>
+    </div>
+    <p class="label"><strong>Descrição:</strong> {{ artista.descricao }}</p>
+    <p>Data de Nascimento: {{ artista.data_nascimento }}</p>
+    {% if artista.data_falecimento %}
+        <p>Data de Falecimento: {{ artista.data_falecimento }}</p>
+    {% endif %}
+</div>
+{% endblock %}
