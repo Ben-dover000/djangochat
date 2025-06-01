@@ -8,3 +8,5 @@ gunicorn
 whitenoise
 daphne
 channels_redis
+cloudinary
+django-cloudinary-storage
