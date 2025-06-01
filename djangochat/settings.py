@@ -16,11 +16,9 @@ import os
 from pathlib import Path
 from telnetlib import LOGOUT
 
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 9961a23 (teste1)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -34,11 +32,10 @@ SECRET_KEY = 'django-insecure-!79n+mp+d)1-=z7w5ee9f5*74mhqbene^c*89j@(1gsot5&t@o
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-<<<<<<< HEAD
 ALLOWED_HOSTS = []
-=======
+
 ALLOWED_HOSTS = ['https://djangochat-ql0k.onrender.com']
->>>>>>> 9961a23 (teste1)
+
 
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_REDIRECT_URL = '/rooms/'
@@ -61,10 +58,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-<<<<<<< HEAD
-=======
+
     'whitenoise.middleware.WhiteNoiseMiddleware',
->>>>>>> 9961a23 (teste1)
+
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -108,10 +104,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-<<<<<<< HEAD
-=======
-# Database (original)
->>>>>>> 9961a23 (teste1)
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -119,14 +112,11 @@ DATABASES = {
     }
 }
 
-<<<<<<< HEAD
-=======
 # Substitui o banco se a variável DATABASE_URL existir (usado no Render, Heroku etc)
 import dj_database_url
 DATABASES['default'] = dj_database_url.config(default=os.environ.get('DATABASE_URL'))
 
 
->>>>>>> 9961a23 (teste1)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -162,10 +152,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-<<<<<<< HEAD
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static"]
-=======
+
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -173,11 +163,3 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'core' / 'static']
 STATIC_ROOT = str(BASE_DIR / 'staticfiles')
-
-
-
->>>>>>> 9961a23 (teste1)
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
