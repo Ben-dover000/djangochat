@@ -5,7 +5,7 @@ services:
     plan: free
     branch: main
     buildCommand: pip install -r requirements.txt
-    startCommand: daphne -b 0.0.0.0 -p $PORT djangochat.asgi:application
+    startCommand: sh -c "daphne -b 0.0.0.0 -p $PORT djangochat.asgi:application"
     envVars:
       - key: DJANGO_SETTINGS_MODULE
         value: djangochat.settings
