@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from cloudinary.models import CloudinaryField  # Import this
+from cloudinary.models import CloudinaryField
 
 class Perfil(models.Model):
     GENERO_CHOICES = [
@@ -11,7 +11,7 @@ class Perfil(models.Model):
     ]
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='perfil')
-    foto_perfil = CloudinaryField('foto_perfil', null=True, blank=True)  # Changed here
+    foto_perfil = CloudinaryField('image', folder='profile_pics', null=True, blank=True)
     data_nascimento = models.DateField(null=True, blank=True)
     genero = models.CharField(max_length=1, choices=GENERO_CHOICES, null=True, blank=True)
 
@@ -33,7 +33,7 @@ class Artist(models.Model):
     descricao = models.TextField(null=True, blank=True)
     data_nascimento = models.DateField()
     data_falecimento = models.DateField(null=True, blank=True)
-    imagem = CloudinaryField('imagem', null=True, blank=True)  # Changed here
+    imagem = CloudinaryField('image', folder='artists', null=True, blank=True)
 
     favorito = models.ManyToManyField(User, related_name='artista_favorito', blank=True)
 
@@ -57,7 +57,7 @@ class Album(models.Model):
     genero = models.CharField(max_length=50, choices=GENRE_CHOICES)
     preco = models.DecimalField(max_digits=10, decimal_places=2)
     data_de_lancamento = models.DateField()
-    imagem = CloudinaryField('imagem', null=True, blank=True)  # Changed here
+    imagem = CloudinaryField('image', folder='albums', null=True, blank=True)
     artista = models.ForeignKey(Artist, on_delete=models.CASCADE, default=1)
     favorito = models.ManyToManyField(User, related_name='album_favorito', blank=True)
 
