@@ -50,19 +50,20 @@ def frontpage(request):
     return render(request, 'core/frontpage.html', {'albums': albums, 'artistas': artistas})  #Manda os resultados (Artistas e Albuns) para a frontpage
 
 
+# core/views.py
+
+
 def signup(request):
     if request.method == 'POST':
         form = CriarConta(request.POST)
-
         if form.is_valid():
-            user = form.save()
-
-            login(request, user)
-
-            return redirect('frontpage')
+            user = form.save()            # actually create the user
+            login(request, user)          # log them in
+            return redirect('frontpage')  # or wherever you want to go next
+        # if form is invalid, we do NOT redirect—fall through so the same form (with errors) is re‐rendered
     else:
         form = CriarConta()
-    
+
     return render(request, 'core/signup.html', {'form': form})
 
 
