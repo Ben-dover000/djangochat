@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: djangochat-web
+    env: python
+    plan: free
+    branch: main
+    buildCommand: pip install -r requirements.txt
+    startCommand: daphne -b 0.0.0.0 -p 10000 djangochat.asgi:application
+    envVars:
+      - key: DJANGO_SETTINGS_MODULE
+        value: djangochat.settings
+      - key: SECRET_KEY
+        fromSecret: SECRET_KEY
+      - key: DATABASE_URL
+        fromSecret: DATABASE_URL
+      - key: REDIS_URL
+        fromSecret: REDIS_URL
+
+  - type: redis
+    name: djangochat-redis
+    plan: free
