@@ -21,13 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # ─── Quick-start development settings - unsuitable for production ────────────────────
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-!79n+mp+d)1-=z7w5ee9f5*74mhqbene^c*89j@(1gsot5&t@o'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-secret-key-for-dev')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-# Permitir apenas o domínio do Render (ou '*' para qualquer host, dependendo do seu caso)
 ALLOWED_HOSTS = ['djangochat-ql0k.onrender.com']
 
 
@@ -79,10 +76,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'djangochat.wsgi.application'
 ASGI_APPLICATION = 'djangochat.asgi.application'
 
+
 CHANNEL_LAYERS = {
     'default': {
-        'BACKEND': 'channels.layers.InMemoryChannelLayer',
-    }
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [os.environ.get("REDIS_URL", "redis://127.0.0.1:6379")],
+        },
+    },
 }
 
 
@@ -98,7 +99,6 @@ DATABASES = {
 
 DATABASE_URL = os.environ.get('DATABASE_URL')
 if DATABASE_URL:
-    # Somente substitui quando a variável existir
     DATABASES['default'] = dj_database_url.parse(DATABASE_URL, conn_max_age=600)
 
 
@@ -135,12 +135,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# Pasta onde você coloca seus arquivos estáticos em desenvolvimento
 STATICFILES_DIRS = [
     BASE_DIR / 'core' / 'static',
 ]
 
-# Pasta de destino quando rodar collectstatic
 STATIC_ROOT = str(BASE_DIR / 'staticfiles')
 
 
