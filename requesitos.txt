@@ -8,6 +8,10 @@ constantly==15.1.0
 cryptography==44.0.0
 daphne==3.0.2
 Django==3.2.25
+<<<<<<< HEAD
+=======
+dj-database-url==1.0.0
+>>>>>>> 9961a23 (teste1)
 hyperlink==21.0.0
 idna==3.10
 importlib-metadata==6.7.0
@@ -24,6 +28,10 @@ sqlparse==0.4.4
 Twisted==23.8.0
 twisted-iocpsupport==1.0.4
 txaio==23.1.1
+<<<<<<< HEAD
 typing_extensions==4.7.1
+=======
+typing_extensions
+>>>>>>> 9961a23 (teste1)
 zipp==3.15.0
 zope.interface==6.4.post2
