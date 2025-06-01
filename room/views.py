@@ -133,19 +133,24 @@ def create_room(request):
         form = RoomCreateForm()
     return render(request, 'room/create_room.html', {'form': form})
 
+# room/views.py
+
 @login_required
 def room_detail(request, slug):
     room = get_object_or_404(Room, slug=slug)
-    # deny access if private and user not in participants
     if room.is_private and request.user not in room.participants.all():
         return render(request, 'room/forbidden.html', status=403)
 
-    messages = room.messages.all()[:25]
+    # Grab the 25 most recent (ordered by date_added descending),
+    # then reverse() them so they render oldest→newest.
+    last_25 = room.messages.order_by('-date_added')[:25]  # newest 25
+    messages = reversed(last_25)                         # so the oldest of those 25 is first
+
     users = room.participants.all()
     return render(request, 'room/room.html', {
         'room': room,
         'messages': messages,
-        'users': users
+        'users': users,
     })
 
 @login_required
