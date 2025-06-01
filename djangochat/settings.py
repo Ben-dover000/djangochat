@@ -55,6 +55,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://djangochat-ql0k.onrender.com",
+]
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+
 ROOT_URLCONF = 'djangochat.urls'
 
 TEMPLATES = [
